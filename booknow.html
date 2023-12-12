@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="booknow.css">
+    <link rel="stylesheet" href="css/mob.css">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <title>Booking Page</title>
+</head>
+<body id="book">
+    <header class="header" style="background-image: url(images/g16.jpeg);">
+        <nav class="navbar">
+            <div class="logo">
+                <a class="fadeIn" href="Home.html">
+                    <img src="images/logo 2.png" alt="logo">
+                </a>
+            </div>
+            <div class="navigation">
+                <input type="checkbox" id="menu-toggle">
+                <label for="menu-toggle" class="menu-icon">&#9776;</label>
+                <div class="navlinks">
+                    <a class="navlink" href="index.html">Home</a>
+                    <a class="navlink" href="Destinations.html">Destinations</a>
+                    <a class="navlink" href="Experience.html">Experience</a>
+                    <a class="navlink" href="Gallery.html">Gallery</a>
+                    <a class="navlink" href="Adventure.html">Adventure</a>
+                    <a class="navlink booking_home" href="BookNow.html">Book Now</a>
+                </div>
+            </div>
+        </nav>
+    
+        <div class="hero_text">
+            <div class="hero_content">
+                <div class="main_image">
+                    
+                </div>
+            </div>
+        </div>
+    
+        <div class="button_explore"></div>
+    </header>
+    <h1>PARADISE PEARL INN</h1>
+    <div class="booking" x-data="ticket">
+    <form>
+        <fieldset>
+            <div class="dates">
+            <div class="check_in">
+                <div class="check_in_date">
+                    <label for="check_in_date">Check-In Date</label>
+                    <input x-model="check_in" type="date" name="check_in_date" id="check_in_date" title="Check-In">
+                </div>
+
+            </div>
+            <div class="check_out">
+                <div class="check_out_date">
+                    <label for="check_out_date">Check-Out Date</label>
+                    <input x-model="check_out" type="date" name="check_out_date" id="check_out_date" @blur="StayDuration" >
+                </div>
+            </div>
+            </div>
+            <div class="details">
+                <div class="name">
+                    <label for="name">Name</label>
+                    <input x-model="name" type="text" name="name" id="name" placeholder="Enter Your Name">
+                </div>
+                <div class="email">
+                    <label for="email">Email</label>
+                    <input x-model="email" type="email" name="email" id="email" placeholder="Enter Your Email">
+                </div>
+                <div class="phone">
+                    <label for="phone">Phone</label>
+                    <input x-model="p_num" type="tel" name="phone" id="phone" placeholder="Enter Your Phone Number">
+                </div>
+            </div>
+            <h1>Choice of Rooms</h1>
+            <div class="Room_selction">
+                <div class="s_room">
+                    <label for="single">Single Room</label>
+                    <button @click="RoomTypes[0].count  = (RoomTypes[0].count - 1 > 0) ? (RoomTypes[0].count - 1) : 0" type="button" id="single_minus">-</button>
+                    <input  type="number" id="single" min="0" max="10" :value="RoomTypes[0].count" readonly>
+                    <button @click="RoomTypes[0].count +=1" type="button" id="single_plus">+</button>
+                </div>
+                <div class="d_room">
+                    <label for="double">Double Room</label>
+                    <button @click="RoomTypes[1].count  = (RoomTypes[1].count - 1 > 0) ? (RoomTypes[1].count - 1) : 0" type="button" id="double_mins">-</button>
+                    <input type="number" id="double" min="0" max="10" :value="RoomTypes[1].count" readonly>
+                    <button @click="RoomTypes[1].count +=1" type="button" id="double_plus">+</button>
+                </div>
+                <div class="t_room">
+                    <label for="triple">Triple Room</label>
+                    <button @click="RoomTypes[2].count  = (RoomTypes[2].count - 1 > 0) ? (RoomTypes[2].count - 1) : 0" type="button" id="triple_mins">-</button>
+                    <input type="number" id="triple" min="0" max="10" :value="RoomTypes[2].count" readonly>
+                    <button @click="RoomTypes[2].count +=1" type="button" id="triple_plus">+</button>
+                </div>
+            </div>
+            <h1>Guest Count</h1>
+            <div class="guest_count">
+                <div class="adult">
+                    <label for="adult">Adults</label>
+                    <button @click="GuestTypes[0].count = (GuestTypes.count - 1 > 0) ? (GuestTypes[0].count - 1) : 0" type="button" id="adult_mins">-</button>
+                    <input type="number" id="adult" min="0" max="10" :value="GuestTypes[0].count" readonly>
+                    <button @click="GuestTypes[0].count += 1" type="button" id="adult_plus">+</button>
+                </div>
+                <div class="child">
+                    <label for="child">Children</label>
+                    <button @click="GuestTypes[1].count = (GuestTypes[1].count - 1 > 0) ? (GuestTypes[1].count - 1) : 0" type="button" id="child_mins">-</button>
+                    <input type="number" id="child" min="0" max="10" :value="GuestTypes[1].count" readonly>
+                    <button @click="GuestTypes[1].count += 1" type="button" id="child_plus">+</button>
+                </div>
+            </div>
+            
+            <h1>Extra Requirments</h1>
+            <div class="Ex_req">
+            <input x-model="wifi" type="checkbox" name="wi-fi" id="wi-fi">
+            <label for="wi-fi">Wi-Fi</label><br>
+            <input x-model="pool" type="checkbox" name="Pool_view" id="Pool_view">
+            <label for="Pool_view">Pool view</label><br>
+            <input x-model="garden" type="checkbox" name="Garden_view" id="Garden_view">
+            <label for="Garden_view">Garden view</label><br>
+            <input x-model="extra_bed" type="checkbox" name="Extra_Bed" id="extra_bed">
+            <label for="extra_bed">Extra Bed</label><br>
+            <input x-model="instructor" type="checkbox" name="instructor" id="instructor">
+            <label for="instructor">Instructor</label><br>
+            </div>
+            <div class="Promo">
+                <input x-model="promo" type="text" name="promo" id="promo" placeholder="Enter Promo Code">
+                <button @click="apply = true" type="button" id="promo_btn">Apply</button>
+            </div>
+            <div class="loyalty">
+                <label for="loyalty">Loyalty</label>
+                <input type="text" name="loyalty" id="loyalty" :value="loyalty()" readonly>
+                <button @click="loyal = true" type="button" id="loyalty_btn">Check Loyalty</button>
+            </div>
+                <button @click="BookNow()" type="button" id="book_btn">Book Now</button>
+                <button @click="favorite()" type="button" id="addfav_btn">Add to Favorite</button>
+                <button @click="getfavorite()" type="button" id="fav_btn">Favorite</button>
+                </fieldset> 
+            <fieldset>
+            <h1>Adventure</h1>
+            <div class="adv">
+                <div>
+                    <label for="sl-adult">Local Adult:</label>
+                    <button @click="Adventure[0].count = (Adventure[0].count - 1 > 0) ? (Adventure[0].count - 1) : 0" type="button" id="sl-adult-minus">-</button>
+                    <input type="number" id="sl-adult" min="0" max="10" :value="Adventure[0].count" readonly>
+                    <button @click="Adventure[0].count += 1" type="button" id="sl-adult-plus">+</button>
+                  </div>
+                  <div>
+                    <label for="sl-child">Local Child:</label>
+                    <button @click="Adventure[1].count = (Adventure[1].count - 1 > 0) ? (Adventure[1].count - 1) : 0" type="button" id="sl-child-minus">-</button>
+                    <input type="number" id="sl-child" min="0" max="10" :value="Adventure[1].count" readonly>
+                    <button @click="Adventure[1].count += 1" type="button" id="sl-child-plus">+</button>
+                  </div>
+                  <div>
+                    <label for="foreigner-adult">Foreigner Adult:</label>
+                    <button @click="Adventure[2].count = (Adventure[2].count - 1 > 0) ? (Adventure[2].count - 1) : 0" type="button" id="foreigner-adult-minus">-</button>
+                    <input type="number" id="foreigner-adult" min="0" max="10" :value="Adventure[2].count" readonly>
+                    <button @click="Adventure[2].count += 1" type="button" id="foreigner-adult-plus">+</button>
+                  </div>
+                  <div>
+                    <label for="foreigner-child">Foreigner Child:</label>
+                    <button @click="Adventure[3].count = (Adventure[3].count - 1 > 0) ? (Adventure[3].count - 1) : 0" type="button" id="foreigner-child-minus">-</button>
+                    <input type="number" id="foreigner-child" min="0" max="10" :value="Adventure[3].count" readonly> 
+                    <button @click="Adventure[3].count += 1" type="button" id="foreigner-child-plus">+</button>
+                  </div>
+                  <button type="button" id="adv_btn">Book Adventure</button>
+            </div>
+        </fieldset>
+    </form>
+    <form>
+        <Fieldset>
+            <table id="information">
+                <tbody>
+                    <tr>
+                        <td>Full Name</td>
+                        <td><div x-text="name"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><div x-text="email"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td><div x-text="p_num"></div></td>
+                    </tr>
+                    <tr>
+                       <td>Stay Duration</td> 
+                       <td><div class="S_duraation"><span x-text="StayDuration()"></span><span> Nights</span></div></td>
+                    </tr>
+                    <tr>
+                        <td>Number of Room</td>
+                        <td><div><span x-text="NumberRooms()"></span><span> Rooms</span></div></td>
+                    </tr>
+                    <tr>
+                        <td>Number of Guest</td>
+                        <td><div class="N_guest"><span x-text="NumberGuests()"></span><span> Guests</span></div></td>
+                    </tr>
+                    <tr>
+                        <td>Additional Requirments</td>
+                        <td><div class="A_requirments">
+                            <span x-show="wifi">Wi-Fi <br></span>
+                            <span x-show="pool">Pool View <br></span>
+                            <span x-show="garden">Garden View <br></span>
+                            <span x-show="extra_bed">Extra Bed <br></span>
+                            <span x-show="instructor">Instructor <br></span>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td>Adventure</td>
+                        <td><div class="Adventure"><span x-text="AdeventureCount()"></span><span> Guests</span></div></td>
+                    </tr>
+                    <tr>
+                        <td>Discount</td>
+                        <td><div class="Discount"><span x-text="Discount()"></span></div></td>
+                    </tr>
+                    <tr>
+                        <td>Current Total Price</td>
+                        <td><div class="F_price"></div><span x-text="Total()"></span></td>
+                    </tr>
+                    <tr>
+                        <td><h1>Overall Booking</h1></td>
+                        <td><div class="O_booking"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Rooms</td>
+                        <td><div class="Rooms"><span x-text="orooms"></span>    </div></td>
+                    </tr>
+                    <tr>
+                        <td>Guests</td>
+                        <td><div class="Guests"><span x-text="oguests"></span></div></td>
+                    </tr>
+                    <tr>
+                        <td>Overall Total</td>
+                        <td><div class="O_total"><span x-text="ototal"></span></div></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </Fieldset>
+        <fieldset>
+            
+        </fieldset>
+    </form>
+    </div>
+
+    <script src="booknow.js"></script>
+</body>
+<section class="footer-distributed">
+
+                            <div class="footer-left">
+
+                               <img src="images/logo 2.png" alt="logo">
+
+                                <p class="footer-links">
+                                    <a class="navlink" href="index.html">Home</a>
+                                    <a class="navlink" href="Destinations.html">Destinations</a>
+                                    <a class="navlink" href="Experience.html">Experience</a>
+                                    <a class="navlink" href="Gallery.html">Gallery</a>
+                                    <a class="navlink" href="Adventure.html">Adventure</a>
+                                    <a class="navlink" href="AboutUs.html">About Us</a>
+                                    <a class="navlink" href="ContactUs.html">Contact Us</a>
+                                    <a class="navlink booking_home" href="BookNow.html">Book Now</a>
+                                </p>
+
+                                <p class="footer-company-name">PARADISE PEARL INN © 1990</p>
+                            </div>
+
+                            <div class="footer-center">
+
+                                <div>
+                                    <i class="fa fa-map-marker"></i>
+                                    <p><span>X7WP+85Q Colombo Rd</span>SriLanka</p>
+                                </div>
+
+                                <div>
+                                    <i class="fa fa-phone"></i>
+                                    <p>+94 199244243</p>
+                                </div>
+
+                                <div>
+                                    <i class="fa fa-envelope"></i>
+                                    <p><a href="mailto:support@company.com">paradise.peral.inn@company.com</a></p>
+                                </div>
+
+                            </div>
+
+                            <div class="footer-right">
+
+                                <p class="footer-company-about">
+                                    <span>About </span>
+                                    A luxury boutique hotel in , Paradise Pearl Inn offers modern comfort and genuine regional charm. It guarantees a wonderful stay with meticulously designed lodging, outstanding culinary experiences, and kind hospitality whether for a romantic getaway, family vacation, or business trip.
+                                </p>
+                              
+
+                                <div class="footer-icons">
+
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+
+                                </div>
+
+                            </div>
+
+                </footer>
+</section>
+</html>
